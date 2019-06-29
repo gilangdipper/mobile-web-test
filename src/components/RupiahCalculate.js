@@ -6,10 +6,29 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
   display: block;
   margin-top: 14px;
+
+  .error-label {
+    color: red;
+  }
 `;
 
 const InputLabel = styled.div`
-  font-size: 20px;
+  font-size: 16px;
+`;
+
+const ListUnits = styled.div`
+  display: blocks;
+  margin-top: 12px;
+
+  div {
+    font-size: 18px;
+    font-style: italic;
+    padding: 0 10px;
+
+    &:nth-child(even) { 
+      background: #ccc
+    }
+  }
 `;
 
 export default class CalculateForm extends Component {
@@ -18,12 +37,12 @@ export default class CalculateForm extends Component {
 		inputError: false,
 	}
   
-  handleNumberChange = (e) => {
+  handleOnEnter = (e) => {
     const rupiahRegex = /^([Rr]p)?\ ?(\d{1,3})(\.?\d{3})*(\,\d*)?$/
     const value = e.target.value
 
     if (!rupiahRegex.test(value)) {
-      this.setState({ inputError: true, number: '' })
+      this.setState({ inputError: true, number: value })
       return
     }
 
@@ -31,7 +50,8 @@ export default class CalculateForm extends Component {
   }
 
   renderMoneyUnits = () => {
-    const stringNumberOnly = this.state.number.replace(/^([Rr]p)?([\d\.]*)\,?(\d*)?$/, "$2").replace(/\./g,'')
+    const { number } = this.state
+    const stringNumberOnly = number.replace(/^([Rr]p)?\ ?([\d\.]*)\,?(\d*)?$/, "$2").replace(/\./g,'')
     let rupiah = parseInt(stringNumberOnly, 10)
 
     return rupiahUnit.map(unitNumber => {
@@ -46,26 +66,28 @@ export default class CalculateForm extends Component {
 
       rupiah = rupiah - (sumUnit * unitNumber)
       
-      return unitItem
+      return `<div>${unitItem}</div>`
     })
-    .filter(word => word.length > 0)
-    .join(', ')
+    .filter(unitString => unitString.length > 0)
+    .join('')
   }
 
   render() {
+    const { inputError, number } = this.state
+
     return (
       <Wrapper>
         <InputLabel>number of rupiahs</InputLabel>
         <Input
           type="text"
-          onPressEnter={this.handleNumberChange}
+          onPressEnter={this.handleOnEnter}
           placeholder="ex: 1.300 / Rp13000 / 1300"
         />
 
-        {this.state.inputError && <p>Error Input</p>}
-
-				{this.state.number !== '' &&
-					<p>{this.renderMoneyUnits()}</p>}
+        {(inputError && number !== '')
+          ? <p className='error-label'>Error Input</p>
+          : number !== '' && 
+              <ListUnits dangerouslySetInnerHTML={{ __html: this.renderMoneyUnits()}} />}
       </Wrapper>
     )
   }

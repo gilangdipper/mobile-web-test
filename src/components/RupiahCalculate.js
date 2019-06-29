@@ -10,11 +10,11 @@ const Wrapper = styled.div`
   .error-label {
     color: red;
   }
-`;
+`
 
 const InputLabel = styled.div`
   font-size: 16px;
-`;
+`
 
 const ListUnits = styled.div`
   display: blocks;
@@ -29,7 +29,7 @@ const ListUnits = styled.div`
       background: #ccc
     }
   }
-`;
+`
 
 export default class CalculateForm extends Component {
 	state = {

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import logo from '../assets/id-flag.png';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import logo from '../assets/id-flag.png'
 
 const HeaderWrapper = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ const HeaderWrapper = styled.div`
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-`;
+`
 
 const HeaderLabel = styled.div`
   div {
@@ -35,7 +35,7 @@ const HeaderLabel = styled.div`
     font-size: 18px;
     font-weight: 500;
   }
-`;
+`
 
 export default class App extends Component {
   render() {

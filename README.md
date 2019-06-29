@@ -1,6 +1,6 @@
 # mobile-web-test
 
-## Setup
+## Run
 
 ``` bash
 1.) git clone https://github.com/gilangdipper/mobile-web-test.git

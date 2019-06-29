@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button } from 'antd';
 import styled from 'styled-components';
 import Header from './components/Header';
+import RupiahCalculate from './components/RupiahCalculate';
 
 const Container = styled.div`
   width: 100%;
@@ -17,9 +17,7 @@ class App extends Component {
     return (
       <Container>
         <Header />
-        <p className="App-intro">
-        <Button type="primary">Button</Button> Ant Design Button with primary color defined in ant-theme-vars.less 
-        </p>
+        <RupiahCalculate />
       </Container>
     );
   }
